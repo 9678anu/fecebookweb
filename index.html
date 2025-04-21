@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,161 +10,258 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Helvetica Neue', 'Arial', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #e6f0fa, #b3d4fc);
-            color: #0033a0;
+            background: linear-gradient(135deg, #0a0a23, #1c1e21);
+            color: #e6e6e6;
             line-height: 1.6;
             padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(24, 119, 242, 0.2), transparent);
+            z-index: -1;
+            animation: pulse 10s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
         }
 
         /* Header */
         header {
-            background-color: #e6f0fa;
-            color: #000;
+            background: linear-gradient(135deg, #1877f2, #3b5998);
+            color: #fff;
             text-align: center;
-            padding: 60px 20px;
+            padding: 100px 20px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: perspective(1000px) translateZ(0);
+            animation: headerPop 1.5s ease-out;
+        }
+
+        @keyframes headerPop {
+            from { transform: perspective(1000px) translateZ(-100px); opacity: 0; }
+            to { transform: perspective(1000px) translateZ(0); opacity: 1; }
         }
 
         header img {
-            width: 230px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            width: 280px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        header img:hover {
+            transform: rotateY(10deg) scale(1.1);
+            filter: drop-shadow(0 0 25px rgba(24, 119, 242, 0.8));
         }
 
         header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(24, 119, 242, 0.7);
+            animation: neonGlow 2s infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 10px rgba(24, 119, 242, 0.7), 0 0 20px rgba(24, 119, 242, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(24, 119, 242, 0.9), 0 0 30px rgba(24, 119, 242, 0.7); }
         }
 
         /* Main Content */
         .main-content {
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 60px auto;
             padding: 0 20px;
+            perspective: 1000px;
         }
 
         /* Section Styling */
         .section {
-            background-color: #fff;
-            padding: 25px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            margin-bottom: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(24, 119, 242, 0.2);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            transform: translateZ(0);
         }
 
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateZ(20px) translateY(-10px);
+            box-shadow: 0 12px 40px rgba(24, 119, 242, 0.4);
         }
 
         .section h2 {
-            font-size: 1.8rem;
-            color: #0033a0;
-            margin-bottom: 12px;
-            border-bottom: 3px solid #3399ff;
-            padding-bottom: 8px;
+            font-size: 2.2rem;
+            color: #1877f2;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 12px;
+            text-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #1877f2, #3b5998);
+            transition: width 0.4s ease;
+        }
+
+        .section:hover h2::after {
+            width: 120px;
         }
 
         .section p {
-            font-size: 1.15rem;
-            color: #333;
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            color: #e6e6e6;
+            margin-bottom: 20px;
         }
 
         .section a {
             display: inline-block;
-            color: #0066cc;
+            color: #fff;
+            background: linear-gradient(135deg, #1877f2, #3b5998);
+            padding: 10px 20px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            margin-top: 10px;
-            transition: color 0.3s ease;
+            margin-top: 12px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 10px rgba(24, 119, 242, 0.5);
         }
 
         .section a:hover {
-            color: #0033a0;
-            text-decoration: underline;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(24, 119, 242, 0.8);
         }
 
         /* Contact Banner */
         .contact-banner {
-            background: linear-gradient(135deg, #3399ff, #0066cc);
+            background: linear-gradient(135deg, #1877f2, #3b5998);
             color: #fff;
             text-align: center;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            margin: 50px 0;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform: translateZ(0);
+            animation: bannerFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes bannerFloat {
+            0% { transform: translateZ(0) translateY(0); }
+            50% { transform: translateZ(10px) translateY(-10px); }
+            100% { transform: translateZ(0) translateY(0); }
         }
 
         .contact-banner p {
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .contact-banner a {
-            background-color: #fff;
-            color: #0066cc;
-            padding: 12px 24px;
-            border-radius: 5px;
+            background: #fff;
+            color: #1877f2;
+            padding: 16px 32px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 700;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .contact-banner a:hover {
-            background-color: #e6f0fa;
-            color: #0033a0;
+            transform: scale(1.15);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
         }
-        .account-section{
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-            gap: 20px;
-            max-width: 1200px;
-            margin-top: 20px;
+
+        .account-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+            margin-top: 25px;
         }
+
         /* Important Info Section */
         .important-info {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin: 35px 0;
+            border: 1px solid rgba(24, 119, 242, 0.2);
         }
 
         .important-info h2 {
-            font-size: 1.8rem;
-            color: #0033a0;
-            margin-bottom: 12px;
+            font-size: 2.2rem;
+            color: #1877f2;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
         }
 
         .important-info p {
-            font-size: 1.1rem;
-            color: #333;
+            font-size: 1.2rem;
+            color: #e6e6e6;
         }
-        .important-info a{
-            color: #0066cc;
+
+        .important-info a {
+            color: #1877f2;
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
+
+        .important-info a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(24, 119, 242, 0.7);
+        }
+
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #0066cc, #0033a0);
+            background: linear-gradient(135deg, #3b5998, #1877f2);
             color: #fff;
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
+            padding: 60px 20px;
+            margin-top: 80px;
             position: relative;
+            box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
         }
 
         footer p {
-            font-size: 1.1rem;
-            margin-top: 8px;
+            font-size: 1.3rem;
+            margin-top: 12px;
+            opacity: 0.9;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
         footer::before {
@@ -175,32 +271,59 @@
             left: 0;
             width: 100%;
             height: 30px;
-            background: linear-gradient(to top, rgba(0, 51, 160, 0), #0066cc);
+            background: linear-gradient(to top, rgba(59, 89, 152, 0), #3b5998);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
             }
 
             .section h2 {
-                font-size: 1.6rem;
+                font-size: 2rem;
             }
 
             .contact-banner p {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
             }
 
             .important-info h2 {
-                font-size: 1.6rem;
+                font-size: 2rem;
+            }
+
+            .account-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 60px 15px;
+            }
+
+            header img {
+                width: 220px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .contact-banner {
+                padding: 30px;
+            }
+
+            .contact-banner a {
+                padding: 12px 24px;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2560px-Facebook_logo_%282023%29.svg.png" alt="facebook Logo" width="180px">
+        <img src="https://media-hosting.imagekit.io/aa5354c25ec3405b/Facebook_New_Logo__2015_.svg-removebg-preview.png?Expires=1839840830&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=uXMc7XjG3D46rFibzIbeb0VZlarUa1XrkgFp4Vc5HTSuhadnMfxraBd8mdirRuILVScpdNw~05~e-zput7ps98vwzzgQcgS6y~8YwqTBp0BfjnlkqcPR0v0i0PHJFMNIdznmGU4rK9IARw0NWJPe1DeoPDLyqHN-~xbxtg8hS-okGrqlvMoS9BCEKhaIE3d-H1A0FrVjdBdAuL1tDq96ogq~3sers8ELka2vTga0Fu172xnvbUGp2LhTJKxe1nGbQfLbBdUXSs9KQQhNUlYEAtLe3ALeA0vkRjn4Xf74uPNTdR2x9eVFW1S~-N0NnBZTMKlPDUQQ4~Yo5IhaTzpGtQ__"
+         alt="facebook Logo" width="250px">
         <h1>24/7 facebook Support Line</h1>
     </header>
 
@@ -224,59 +347,48 @@
         </div>
 
         <div class="section">
-            <h2>Dispute Resolution & Chargebacks            </h2>
+            <h2>Dispute Resolution & Chargebacks</h2>
             <p>If you notice an unfamiliar charge or need to correct a payment issue, we offer simple tools and expert guidance to help you file a chargeback and resolve concerns efficiently.</p>
         </div>
         <div class="section">
             <h2>Round-the-Clock Fraud Protection</h2>
-            <p>Your security is our priority. We monitor transactions and account activity 24/7 to detect fraud, stop scams, and prevent identity theft. With a global team of over 2,000 fraud specialists, your protection is always active.            </p>
+            <p>Your security is our priority. We monitor transactions and account activity 24/7 to detect fraud, stop scams, and prevent identity theft. With a global team of over 2,000 fraud specialists, your protection is always active.</p>
             <a href="tel:+1(855)-574-4604" style="float: right;">Tech Support Hotline:  +1(855)-574-4604</a><br>
         </div></div>
         <h1>Our Commitment to Security</h1>
         <div class="section">
             <h2>Next-Level Threat Detection</h2>
-            <p>
-                We use intelligent behavior-based risk analysis to shield your account from external threats—giving you confidence whenever you shop, sell, or manage your services.</p>
+            <p>We use intelligent behavior-based risk analysis to shield your account from external threats—giving you confidence whenever you shop, sell, or manage your services.</p>
         </div>
 
         <div class="section">
             <h2>Encrypted, Safe Connections</h2>
-            <p>Your logins and transactions are protected by encrypted connections. We use TLS 1.2 and certificate pinning to ensure that every interaction remains secure and trustworthy.
-
-            </p>
+            <p>Your logins and transactions are protected by encrypted connections. We use TLS 1.2 and certificate pinning to ensure that every interaction remains secure and trustworthy.</p>
         </div>
 
         <div class="section">
             <h2>Why Choose Us?</h2>
             <p>We follow facebook’s highest safety standards for all payments—whether made online, via mobile, or in-person. Our focus on cutting-edge cybersecurity means you're protected from evolving digital threats.</p>
-            <p>We’re constantly enhancing our security systems to stay ahead of hackers and fraud. With facebook, your information is defended by some of the industry’s most robust protective technologies.            </p>
+            <p>We’re constantly enhancing our security systems to stay ahead of hackers and fraud. With facebook, your information is defended by some of the industry’s most robust protective technologies.</p>
             <a href="tel:+1(855)-574-4604">Customer Support: +1(855)-574-4604</a>
         </div>
 
         <div class="important-info">
             <h2>Notice:</h2>
-            <p>Shop New AVS is an independent online retailer specializing in computer accessories and software. All products we sell are genuine and supported by their original manufacturers. We fully comply with the FTC’s Mail, Internet, or Telephone Order Rule, ensuring every transaction is safe and transparent.
-
-            </p>
-            <p>Although our products are authentic and sourced from authorized suppliers, Shop New AVS is not affiliated with or endorsed by facebook or any other named brands. Some items we offer may also be available on the official websites of the original manufacturers.
-
-            </p>
-            <p>Recent updates to facebook’s policies have led us to revise our payment and refund process. Full information can be found in our updated [Buying & Refund Policy] on our website.
-
-            </p>
+            <p>Shop New AVS is an independent online retailer specializing in computer accessories and software. All products we sell are genuine and supported by their original manufacturers. We fully comply with the FTC’s Mail, Internet, or Telephone Order Rule, ensuring every transaction is safe and transparent.</p>
+            <p>Although our products are authentic and sourced from authorized suppliers, Shop New AVS is not affiliated with or endorsed by facebook or any other named brands. Some items we offer may also be available on the official websites of the original manufacturers.</p>
+            <p>Recent updates to facebook’s policies have led us to revise our payment and refund process. Full information can be found in our updated [Buying & Refund Policy] on our website.</p>
         </div>
 
         <div class="important-info">
             <h2>Need Assistance?</h2>
-            <p>Please review our Terms of Service and Privacy Policy before using our platform. For additional support, visit our Help Center or reach out to our customer service team directly.            </p>
+            <p>Please review our Terms of Service and Privacy Policy before using our platform. For additional support, visit our Help Center or reach out to our customer service team directly.</p>
             <a href="tel:+1(855)-574-4604">Customer Support: +1(855)-574-4604</a>
         </div>
     </div>
 
     <footer>
-        <p>Reach Out Anytime via Our Help Center or Customer Support Team
-
-        </p>
+        <p>Reach Out Anytime via Our Help Center or Customer Support Team</p>
         <p>© 2025 facebook. All rights reserved.</p>
     </footer>
 </body>
